@@ -1,8 +1,4 @@
-﻿@{
-    ViewData["Title"] = "My budget";
-}
-
-@model BudgetApp.ViewModels.BudgetViewModel;
+﻿@model BudgetApp.ViewModels.BudgetViewModel;
 
 <!doctype html>
 <html lang="en">
@@ -26,52 +22,75 @@
             <div class="col-12">
                 @if (Model.Total >= 0)
                 {
-                <div class="alert alert-success" @*role="alert"*@>
-                    Overskudd: @Model.Total
-                </div>
-                } else {
-                <div class="alert alert-danger" @*role="alert"*@>
-                    Underskudd: @Model.Total
-                </div>
+                    <div class="alert alert-success">
+                        Overskudd: @Model.Total
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger">
+                        Underskudd: @Model.Total
+                    </div>
                 }
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="card" style="margin-bottom: 2em">
-                    <div class="card-header">
-                        Inntekter
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        @foreach (var i in Model.Income)
-                        {
-                            <li class="list-group-item">@i.Name - @i.Amount</li>
-                        }
-                    </ul>
-                    <div class="card-footer">
-                        <b>Total: @Model.IncomeTotal</b>
+
+                <div class="card border-success mb-3">
+                    <div class="card-header text-success"><h5>Inntekter</h5></div>
+                    <div class="card-body text-success">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var i in Model.Income)
+                            {
+                            <li class="list-group-item text-dark">
+                                <div style="float: left">
+                                    @i.Name
+                                    </div>
+                                    <div style="float: right">
+                                        @i.Amount
+                                    </div>
+                            </li>
+                            }
+                        </ul>
+                        <h5 class="card-title" style="margin-top: 2em">
+                            <div style="float: left">
+                                Totalt:
+                            </div>
+                            <div style="float: right">
+                                @Model.IncomeTotal
+                            </div>
+                        </h5>
                     </div>
                 </div>
             </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            Utgifter
-                        </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-danger mb-3">
+                    <div class="card-header text-danger"><h5>Utgifter</h5></div>
+                    <div class="card-body text-danger">
                         <ul class="list-group list-group-flush">
                             @foreach (var i in Model.Expenses)
                             {
-                                <li class="list-group-item">@i.Name - @i.Amount</li>
+                                <li class="list-group-item text-dark">
+                                    @i.Name
+                                    <div style="float: right">
+                                        @i.Amount
+                                    </div>
+                                </li>
                             }
                         </ul>
-                        <div class="card-footer">
-                            <b>Total: @Model.ExpenseTotal</b>
-                        </div>
+                        <h5 class="card-title" style="margin-top: 2em">
+                            <div style="float: left">
+                                Totalt:
+                            </div>
+                            <div style="float: right">@Model.ExpenseTotal</div>
+                        </h5>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 
     <!-- Optional JavaScript -->
