@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BudgetApp.Models
 {
     public class Budget
     {
-        public List<Item> Incomes { get; set; }
-        public List<Item> Expenses { get; set; }
-
+        public int Id { get; set; }
     }
 }
