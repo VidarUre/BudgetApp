@@ -1,6 +1,7 @@
 ﻿using BudgetApp.Db;
 using BudgetApp.Models;
 using BudgetApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace BudgetApp.Controllers
 {
+
+    [Authorize]
     public class BudgetController : Controller // Hallo
     {
 

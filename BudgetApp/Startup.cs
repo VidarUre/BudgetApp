@@ -27,6 +27,8 @@ namespace BudgetApp
         {
             services.AddControllersWithViews();
 
+            services.AddRazorPages();
+
             services.AddDbContext<BudgetContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("BudgetContext")));
         }
@@ -49,6 +51,7 @@ namespace BudgetApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -56,6 +59,7 @@ namespace BudgetApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Budget}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
