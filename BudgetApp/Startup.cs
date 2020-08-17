@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BudgetApp.Db;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,9 +10,12 @@ namespace BudgetApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -29,8 +27,15 @@ namespace BudgetApp
 
             services.AddRazorPages();
 
+            var connectionString = "";
+
+            if (_env.IsDevelopment())
+                connectionString = Configuration.GetConnectionString("BudgetContext");
+            else if (_env.IsProduction())
+                connectionString = Configuration.GetConnectionString("BudgetProdContext");
+
             services.AddDbContext<BudgetContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("BudgetContext")));
+            options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -45,7 +45,7 @@ namespace BudgetApp.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index([Bind("Id, Name, Amount, ItemType")] Item item)
         {
             var budget = await _context.Budget.Where(x => x.Id == 1).SingleOrDefaultAsync();
@@ -64,7 +64,7 @@ namespace BudgetApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-
+               
             return View();
         }
 
